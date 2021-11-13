@@ -6,6 +6,12 @@ import gl
 fatal(gl_window("jam24", 600, 800, 0, 4))
 ph_initialize(xy_f { 0, -16 })
 
+/*
+import imgui
+im_init(false)
+assert im_add_font("data/fonts/Droid_Sans/DroidSans.ttf", 20.0)
+*/
+
 let scale_const = .04
 let ground = ph_create_box(xy { 0.0, 0.0 }, xy { .25 / scale_const, 0.0 })
 var squares = []
@@ -45,7 +51,11 @@ def crash(w: float, h: float):
 
 while gl_frame():
 	gl_clear(palette.bg)
-
+/*
+	im_frame():
+		im_window("palette", im_window_always_autoresize):
+			palette = im_edit_anything(palette)
+*/
 	let dt = gl_delta_time()
 	let  t = gl_time()
 
