@@ -65,7 +65,7 @@ while gl_frame():
 				min = dist
 				best = sq
 		if best:
-			if min < size * 2:
+			if min < size + 1:
 				// ph_set_color(best, color_red)
 				col = color_green
 			if min < size * 2:
@@ -97,7 +97,7 @@ while gl_frame():
 				min = dist
 				best = sq
 		if best:
-			if min < size * 2:
+			if min < size + 1:
 				// ph_set_color(best, color_red)
 				col = color_green
 		gl_color(col)
