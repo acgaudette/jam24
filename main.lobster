@@ -11,6 +11,16 @@ let ground = ph_create_box(xy { 0.0, 0.0 }, xy { .25 / scale_const, 0.0 })
 var squares = []
 var squares_big = []
 
+class Palette:
+	bg = color_dark_grey
+	crash = color_grey
+	goal = color_grey
+	goal_short = color { .75, .75, .75, 1 }
+	block = color_white
+	link = color_green
+	mouse = color { .5, .5, .5, .5 }
+var palette = Palette {}
+
 def reset():
 	squares = []
 	squares_big = []
@@ -26,7 +36,7 @@ def crash(w: float, h: float):
 			xy   { -1 / scale_const, sq_scale * 2 },
 			xy_f { sq_scale, sq_scale }
 		)
-		ph_set_color(sq, color_grey)
+		ph_set_color(sq, palette.crash)
 		ph_dynamic(sq, true)
 		ph_set_linear_velocity(sq, xy_f { 48, 4 })
 		squares_big.push(sq)
@@ -34,7 +44,7 @@ def crash(w: float, h: float):
 		alpha = min(1, alpha + max(0.1, alpha) * .1)
 
 while gl_frame():
-	gl_clear(color_dark_grey)
+	gl_clear(palette.bg)
 
 	let dt = gl_delta_time()
 	let  t = gl_time()
@@ -49,7 +59,7 @@ while gl_frame():
 	gl_translate(xy { w_half, 0 }):
 		gl_scale(scale)
 		gl_translate(xy_f { 0, 2 })
-		var col = color_grey
+		var col = palette.goal
 
 		var pos = xy_f { 0, (h - 2 * scale) / scale }
 		let size = max(0, min(3, 3 - pow(t, .5) * .2))
@@ -60,14 +70,14 @@ while gl_frame():
 		for (squares) sq:
 			let sqpos = ph_get_position(sq)
 			let dist = magnitude(sqpos - pos)
-			ph_set_color(sq, color_white)
+			ph_set_color(sq, palette.block)
 			if dist < min:
 				min = dist
 				best = sq
 		if best:
 			if min < size + 1:
 				// ph_set_color(best, color_red)
-				col = color_green
+				col = palette.link
 			if min < size * 2:
 				if t - t_close > 1:
 					crash(w, h)
@@ -81,7 +91,12 @@ while gl_frame():
 	gl_translate(xy { w_half, h * .5 }):
 		gl_scale(scale)
 		gl_translate(xy_f { -8, 0 })
-		var col = color { .75, .75, .75, alpha }
+		var col = color {
+			palette.goal_short.red,
+			palette.goal_short.green,
+			palette.goal_short.blue,
+			alpha,
+		}
 
 		var pos = xy_f { -8, h * .5 / scale }
 		let size = max(0, min(2, 2 - pow(t, .5) * .15))
@@ -92,14 +107,14 @@ while gl_frame():
 		for (squares) sq:
 			let sqpos = ph_get_position(sq)
 			let dist = magnitude(sqpos - pos)
-			ph_set_color(sq, color_white)
+			ph_set_color(sq, palette.block)
 			if dist < min:
 				min = dist
 				best = sq
 		if best:
 			if min < size + 1:
 				// ph_set_color(best, color_red)
-				col = color_green
+				col = palette.link
 		gl_color(col)
 		gl_circle(size, 128)
 
@@ -108,7 +123,7 @@ while gl_frame():
 		let mouse = gl_local_mouse_pos(0)
 
 		gl_translate(mouse):
-			gl_color(color { .5, .5, .5, .5 })
+			gl_color(palette.mouse)
 			gl_open_circle(1, 128, .1)
 
 		if gl_button("mouse1") == 1:
