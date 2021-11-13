@@ -12,13 +12,13 @@ var squares = []
 var squares_big = []
 
 class Palette:
-	bg = color_dark_grey
-	crash = color_grey
-	goal = color_grey
-	goal_short = color { .75, .75, .75, 1 }
-	block = color_white
-	link = color_green
-	mouse = color { .5, .5, .5, .5 }
+	bg    = color { .745, .098, .216, 1 }
+	goal  = color { 1, .790, 0, 1 }
+	block = color { .804, 1, .678, 1 }
+	crash = color { .178, .046, .063, 1}
+	link  = color { 1, 1, 1, 1 }
+	mouse = color { 1, 1, 1, .125 }
+	// goal_short = color { .75, .75, .75, 1 }
 var palette = Palette {}
 
 def reset():
@@ -92,9 +92,12 @@ while gl_frame():
 		gl_scale(scale)
 		gl_translate(xy_f { -8, 0 })
 		var col = color {
-			palette.goal_short.red,
-			palette.goal_short.green,
-			palette.goal_short.blue,
+			// palette.goal_short.red,
+			// palette.goal_short.green,
+			// palette.goal_short.blue,
+			   palette.goal.red,
+			   palette.goal.green,
+			   palette.goal.blue,
 			alpha,
 		}
 
