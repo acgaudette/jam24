@@ -49,7 +49,7 @@ def crash(w: float, h: float):
 		ph_set_linear_velocity(sq, xy_f { 48, 4 })
 		squares_big.push(sq)
 		t_crash = gl_time()
-		alpha = min(1, alpha + max(0.1, alpha) * .1)
+		alpha = min(1, alpha + max(0.1, alpha) * .2)
 
 while gl_frame():
 	gl_clear(palette.bg)
