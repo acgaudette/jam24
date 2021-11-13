@@ -3,7 +3,7 @@ import vec
 import color
 import gl
 
-fatal(gl_window("jam24", 800, 800))
+fatal(gl_window("jam24", 600, 800))
 ph_initialize(xy_f { 0, -16 })
 
 let scale_const = .04
