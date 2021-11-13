@@ -70,10 +70,10 @@ while gl_frame():
 
 	gl_translate(xy { w_half, 0 }):
 		gl_scale(scale)
-		gl_translate(xy_f { 0, 2 })
+		gl_translate(xy_f { 0, 4 })
 		var col = palette.goal
 
-		var pos = xy_f { 0, (h - 2 * scale) / scale }
+		var pos = xy_f { 0, (h - 4 * scale) / scale }
 		let size = max(0, min(3, 3 - pow(t, .5) * .2))
 
 		var min = 2. * h
@@ -90,7 +90,7 @@ while gl_frame():
 			if min < size + 1:
 				// ph_set_color(best, color_red)
 				col = palette.link
-			if min < size * 2:
+			if min < size * 2 + .5:
 				if t - t_close > 1:
 					crash(w, h)
 			else:
