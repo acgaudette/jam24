@@ -16,6 +16,7 @@ def reset():
 	squares_big = []
 
 var t_crash = 0.
+var t_close = 0.
 var alpha = 0.
 
 def crash(w: float, h: float):
@@ -36,6 +37,7 @@ while gl_frame():
 	gl_clear(color_dark_grey)
 
 	let dt = gl_delta_time()
+	let  t = gl_time()
 
 	let w = gl_window_size().x
 	let w_half = w * .5
@@ -50,6 +52,7 @@ while gl_frame():
 		var col = color_grey
 
 		var pos = xy_f { 0, (h - 2 * scale) / scale }
+		let size = max(0, min(3, 3 - pow(t, .5) * .2))
 
 		var min = 2. * h
 		var best = nil
@@ -62,13 +65,18 @@ while gl_frame():
 				min = dist
 				best = sq
 		if best:
-			if min < 2:
+			if min < size * 2:
 				// ph_set_color(best, color_red)
 				col = color_green
-			if min < 4:
-				crash(w, h)
+			if min < size * 2:
+				if t - t_close > 1:
+					crash(w, h)
+			else:
+				t_close = t
+		else:
+			t_close = t
 		gl_color(col)
-		gl_circle(1, 128)
+		gl_circle(size, 128)
 
 	gl_translate(xy { w_half, h * .5 }):
 		gl_scale(scale)
@@ -76,6 +84,7 @@ while gl_frame():
 		var col = color { .75, .75, .75, alpha }
 
 		var pos = xy_f { -8, h * .5 / scale }
+		let size = max(0, min(2, 2 - pow(t, .5) * .15))
 
 		var min = 2. * h
 		var best = nil
@@ -88,11 +97,11 @@ while gl_frame():
 				min = dist
 				best = sq
 		if best:
-			if min < 2:
+			if min < size * 2:
 				// ph_set_color(best, color_red)
 				col = color_green
 		gl_color(col)
-		gl_circle(1, 128)
+		gl_circle(size, 128)
 
 	gl_translate(xy { w_half, h }):
 		gl_scale(scale_xy)
