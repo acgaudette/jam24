@@ -19,10 +19,12 @@ var squares_big = []
 
 class Palette:
 	bg    = color { .745, .098, .216, 1 }
-	goal  = color { 1, .790, 0, 1 }
-	block = color { .804, 1, .678, 1 }
-	crash = color { .178, .046, .063, 1}
-	link  = color { 1, 1, 1, 1 }
+	// goal = color { 1, .790, 0, 1 }
+	goal = color { 1, .075, .249, 1 }
+	block = color { .067, .822, .473, 1 }
+	crash = color { .442, .076, .143, 1}
+	// link = color { 1, .977, .726, 1 }
+	link = color { 1, .814, .749, 1 }
 	mouse = color { 1, 1, 1, .125 }
 	// goal_short = color { .75, .75, .75, 1 }
 var palette = Palette {}
