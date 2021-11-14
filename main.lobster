@@ -7,9 +7,9 @@ fatal(gl_window("jam24", 600, 800, 0, 4))
 ph_initialize(xy_f { 0, -16 })
 
 /*
-import imgui
-im_init(false)
-assert im_add_font("data/fonts/Droid_Sans/DroidSans.ttf", 20.0)
+	import imgui
+	im_init(false)
+	assert im_add_font("data/fonts/Droid_Sans/DroidSans.ttf", 20.0)
 */
 
 let scale_const = .04
@@ -19,19 +19,12 @@ var squares_big = []
 
 class Palette:
 	bg    = color { .745, .098, .216, 1 }
-	// goal = color { 1, .790, 0, 1 }
-	goal = color { 1, .075, .249, 1 }
+	goal  = color { 1, .075, .249, 1 }
 	block = color { .067, .822, .473, 1 }
 	crash = color { .442, .076, .143, 1}
-	// link = color { 1, .977, .726, 1 }
-	link = color { 1, .814, .749, 1 }
+	link  = color { 1, .814, .749, 1 }
 	mouse = color { 1, 1, 1, .125 }
-	// goal_short = color { .75, .75, .75, 1 }
 var palette = Palette {}
-
-def reset():
-	squares = []
-	squares_big = []
 
 var t_crash = 0.
 var t_close = 0.
@@ -88,7 +81,7 @@ while gl_frame():
 				best = sq
 		if best:
 			if min < size + 1:
-				// ph_set_color(best, color_red)
+				/* ph_set_color(best, color_red) */
 				col = palette.link
 			if min < size * 2 + .5:
 				if t - t_close > 1:
@@ -104,12 +97,9 @@ while gl_frame():
 		gl_scale(scale)
 		gl_translate(xy_f { -8, 0 })
 		var col = color {
-			// palette.goal_short.red,
-			// palette.goal_short.green,
-			// palette.goal_short.blue,
-			   palette.goal.red,
-			   palette.goal.green,
-			   palette.goal.blue,
+			palette.goal.red,
+			palette.goal.green,
+			palette.goal.blue,
 			alpha,
 		}
 
@@ -128,7 +118,7 @@ while gl_frame():
 				best = sq
 		if best:
 			if min < size + 1:
-				// ph_set_color(best, color_red)
+				/* ph_set_color(best, color_red) */
 				col = palette.link
 		gl_color(col)
 		gl_circle(size, 128)
